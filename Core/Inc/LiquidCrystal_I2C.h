@@ -69,7 +69,6 @@ typedef struct LiquidCrystal_I2C
 #define Rs (0x01 << 0)  // Register select bit
 
 void InitLiquidCrystal_I2C(LiquidCrystal_I2C* lcd, I2C_HandleTypeDef *hi2c, uint8_t lcd_Addr,uint8_t lcd_rows, uint8_t lcd_cols);
-void begin(LiquidCrystal_I2C* lcd, uint8_t lines, uint8_t cols);
 void clear(LiquidCrystal_I2C* lcd);
 void home(LiquidCrystal_I2C* lcd);
 

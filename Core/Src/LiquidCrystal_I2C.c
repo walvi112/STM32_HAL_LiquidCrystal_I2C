@@ -17,21 +17,15 @@ void InitLiquidCrystal_I2C(LiquidCrystal_I2C* lcd, I2C_HandleTypeDef *hi2c, uint
 	lcd-> _backlightval = LCD_NOBACKLIGHT;
 	lcd->_hi2c = hi2c;
 	lcd->_displayfunction = LCD_4BITMODE | LCD_1LINE | LCD_5x8DOTS;
-	begin(lcd, lcd->_rows, lcd->_cols);
-}
 
-void begin(LiquidCrystal_I2C* lcd, uint8_t lines, uint8_t cols)
-{
-	uint8_t dotsize = DOTSIZE;
-
-	if (lines > 1)
+	if (lcd->_rows > 1)
 	{
 		lcd->_displayfunction |= LCD_2LINE;
 	}
-	lcd->_numlines = lines;
 
+	uint8_t dotsize = DOTSIZE;
 	// for some 1 line displays you can select a 10 pixel high font
-	if ((dotsize != 0) && (lines == 1))
+	if ((dotsize != 0) && (lcd->_rows == 1))
 	{
 		lcd->_displayfunction |= LCD_5x10DOTS;
 	}
@@ -99,8 +93,8 @@ void home(LiquidCrystal_I2C* lcd)
 void setCursor(LiquidCrystal_I2C* lcd, uint8_t row, uint8_t col)
 {
 	int row_offsets[] = { 0x00, 0x40, 0x00 + lcd->_cols, 0x40 + lcd->_cols};
-	if ( row > lcd->_numlines ) {
-		row = lcd->_numlines-1;    // we count rows starting w/0
+	if ( row > lcd->_rows ) {
+		row = lcd->_rows-1;    // we count rows starting w/0
 	}
 	command(lcd, LCD_SETDDRAMADDR | (col + row_offsets[row]));
 }

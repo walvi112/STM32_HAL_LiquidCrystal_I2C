@@ -101,9 +101,9 @@ int main(void)
   InitLiquidCrystal_I2C(&liquidCrystal, &hi2c1, LCD_ADDR, 2, 20);
   backlight(&liquidCrystal);
   setCursor(&liquidCrystal, 0, 0);
-  noAutoscroll(&liquidCrystal);
-  lcdPrint(&liquidCrystal, "helo");
-
+  lcdPrint(&liquidCrystal, "hello");
+  setCursor(&liquidCrystal, 1, 3);
+  lcdPrint(&liquidCrystal, "world");
   /* USER CODE END 2 */
 
   /* Infinite loop */
